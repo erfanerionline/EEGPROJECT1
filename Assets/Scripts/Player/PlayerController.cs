@@ -5,14 +5,14 @@ using System.IO;
 
 public class PlayerController : MonoBehaviour
 {
-    public ushort speed=15;
+    public ushort speed;
     private Rigidbody RB;
 
 
     public float turnSpeed = 4.0f;
-    public float minTurnAngle = -40.0f;
-    public float maxTurnAngle = 40.0f;
-    private float rotX;
+    public float minTurnAngle = -20.0f;
+    public float maxTurnAngle = 20.0f;
+    private float rotX, rotY;
 
     //save output excel
     string filename = "";
@@ -38,14 +38,15 @@ public class PlayerController : MonoBehaviour
     void MouseAiming()
     {
         // get the mouse inputs
-        float y = Input.GetAxis("Mouse X") * turnSpeed;
+        rotY += Input.GetAxis("Mouse X") * turnSpeed;
         rotX += Input.GetAxis("Mouse Y") * turnSpeed;
 
         // clamp the vertical rotation
         rotX = Mathf.Clamp(rotX, minTurnAngle, maxTurnAngle);
+        rotY = Mathf.Clamp(rotY, minTurnAngle, maxTurnAngle);
 
         // rotate the camera
-        transform.eulerAngles = new Vector3(-rotX, transform.eulerAngles.y + y, 0);
+        transform.eulerAngles = new Vector3(-rotX, rotY, 0);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,7 +62,7 @@ public class PlayerController : MonoBehaviour
     {
         filename = Application.dataPath + "event_log.csv";
         TextWriter tw = new StreamWriter(filename, false);
-        tw.WriteLine("Time, Collide");
+        tw.WriteLine("Time, Collide, Manikin");
         tw.Close();
     }
     public void WriteCSV(Collider obj)
