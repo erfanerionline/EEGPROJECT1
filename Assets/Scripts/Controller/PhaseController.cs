@@ -39,12 +39,12 @@ public class PhaseController : MonoBehaviour
             Time.timeScale = 0;
             showPhase(3);
         }
-        if (Time.time >= 90 && isOkClick2 && isOkClick3 && !isOkClick4)
+        if (Time.time >= 90 && !isOkClick4)
         {
             Time.timeScale = 0;
             showPhase(4);
         }
-        if (Time.time >= 120)
+        else if (isOkClick4)
         {
             Time.timeScale = 0;
             //SceneManager.E(SceneManager.GetActiveScene().buildIndex);
@@ -81,7 +81,7 @@ public class PhaseController : MonoBehaviour
                     phase.CrossFadeAlpha(0f, 0.5f, false);
                 }
                 break;
-            case 4: //Level 3
+            case 4: //Level 4
                 if (isPhase && isOkClick4 == false)
                 {
                     Cursor.visible = true;
@@ -103,7 +103,7 @@ public class PhaseController : MonoBehaviour
     {
         isOkClick2 = Time.time >= 30 && Time.time < 31 ? true : false;
         isOkClick3 = Time.time >= 60 && Time.time < 61 ? true : false;
-        isOkClick4 = Time.time >= 90 && Time.time < 91 ? true : false;
+        isOkClick4 = Time.time >= 90 ? true : false;
 
         //Write csv
         WriteCSV();
@@ -128,7 +128,7 @@ public class PhaseController : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            slider[i].value = slider[i].minValue;
+            slider[i].value = 5;
         }
 
         tw.Close();

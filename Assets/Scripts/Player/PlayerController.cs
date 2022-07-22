@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
     public ushort speed;
+    public InputField speedText;
     private Rigidbody RB;
 
 
@@ -73,5 +76,13 @@ public class PlayerController : MonoBehaviour
         tw.WriteLine(Time.time+","+ obj.gameObject.name);
 
         tw.Close();
+    }
+
+    public void setSpeed()
+    {
+        string s = speedText.text;
+        if(!string.IsNullOrWhiteSpace(speedText.text)) speed = Convert.ToUInt16(s);
+        Debug.Log(s);
+        //speed = ushort.Parse(speedText.text);
     }
 }
