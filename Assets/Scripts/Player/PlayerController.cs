@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     {
         initCSV();
         RB = GetComponent<Rigidbody>();
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -32,7 +33,6 @@ public class PlayerController : MonoBehaviour
         ////Rotation
         //transform.Rotate(Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
         MouseAiming();
-
     }
 
     void MouseAiming()

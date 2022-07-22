@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObstacleRemover : MonoBehaviour
 {
-    private int speed = 2;
+    public int speed = 1;
     Rigidbody rb;
     // Start is called before the first frame update
     void Start()
@@ -15,6 +15,7 @@ public class ObstacleRemover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale == 0) speed = 0; else speed = 1;
         rb.AddForce(0,0, speed);
         //if (Time.time >= nextUpdate)
         //{

@@ -7,19 +7,20 @@ public class ObstacleSpawner : MonoBehaviour
     public GameObject Obstacle;
 
     private int nextUpdate = 2; //start form 4 (because We already created obstacles at start)
-    private int nextGenerate = 8;
+    private int nextGenerate = 4;
+    private int multiply = 1;
+    private int spaceBetween = 40;
 
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.visible = false;
         for (int i = 1; i <= 4; i++)
         {
             //Rand x,y position
-            int X = Random.Range(-5, 5);
+            int X = Random.Range(-2, 2);
             int Y = Random.Range(-2, 2);
 
-            Instantiate(Obstacle).transform.position = new Vector3(X, Y, i * 40);
+            Instantiate(Obstacle).transform.position = new Vector3(X, Y, i * spaceBetween);
         }
     }
 
@@ -59,8 +60,9 @@ public class ObstacleSpawner : MonoBehaviour
             int Y = Random.Range(-2, 2);
             if (Time.time >= nextGenerate)
             {
-                obstacle.transform.position = new Vector3(X, Y, nextUpdate * 25);
-                nextGenerate = Mathf.FloorToInt(Time.time) + 2;
+                obstacle.transform.position = new Vector3(X, Y, (spaceBetween * 4) + spaceBetween * multiply);
+                multiply++;
+                nextGenerate = Mathf.FloorToInt(Time.time) + 1;
             }
         }
     }
